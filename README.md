@@ -46,3 +46,21 @@ Daily-CP-in-Java/
 ├── LeetCode/         # LeetCode solutions
 ├── LICENSE
 └── README.md
+```
+📈 Stats
+🧾 Total commits: 500+
+
+🛠 Language: Java
+
+🧪 Platforms: 4
+
+🕓 Last updated: Daily
+
+🌟 Star this repo
+If this repository helps you, consider giving it a ⭐ to support and encourage consistent contributions.
+
+🧑‍💻 Author
+Aman Singh
+Java enthusiast & Competitive Programmer
+[GitHub Profile »](https://github.com/Aman-Singh-07)
+
