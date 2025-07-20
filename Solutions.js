@@ -1,4 +1,4 @@
-  const sampleSolutions = [
+  window.sampleSolutions = [
   {
         "platform": "LeetCode",
         "title": "First Missing Positive",

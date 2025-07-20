@@ -2,50 +2,135 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CP Tracker | Aman Singh</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codinta | Aman Singh</title>
     <meta name="description"
         content="Track and explore all your Competitive Programming solutions in Java across multiple platforms. Professional, easy, and GitHub-integrated.">
     <link rel="icon" href="https://github.com/Aman-Singh-07.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#24292f',
-                        secondary: '#1e1b4b',
-                        accent: '#3b82f6',
-                        github: '#24292f'
-                    },
-                    fontFamily: {
-                        'mono': ['Fira Mono', 'Menlo', 'Monaco', 'Consolas', 'monospace']
-                    }
-                }
+    <style>
+        /* Background Effects */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
             }
         }
-    </script>
-    <style>
+
+        .float-animation {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(147, 51, 234, 0.9);
+            }
+        }
+
+        .glow-effect:hover {
+            animation: pulse-glow 1.5s infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spin-animation {
+            animation: spin 15s linear infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bounce-animation {
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid rgba(147, 51, 234, 0.2);
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        #nav-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #nav-menu.hidden {
+            transform: translateX(100%);
+        }
+
+        .inRow {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Custom scrollbar for dark bg */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8257e5;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1b4b;
+        }
+
         .gradient-bg {
             background: linear-gradient(120deg, #24292f 0%, #1e1b4b 60%, #3b82f6 100%);
         }
 
-        .card-hover {
-            transition: transform 0.25s cubic-bezier(.4, 0, .2, 1), box-shadow 0.25s cubic-bezier(.4, 0, .2, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 12px 32px rgba(44, 62, 80, .12);
-        }
-
         .stats-card {
-            background: linear-gradient(120deg, #059669 0%, #10b981 100%);
+            background: linear-gradient(120deg, #7c3aed 0%, #6366f1 100%);
         }
 
         .difficulty-basic {
-            background: linear-gradient(120deg, #7510b9 0%, #c334d3 100%);
+            background: linear-gradient(120deg, #a21caf 0%, #d946ef 100%);
         }
 
         .difficulty-easy {
@@ -77,39 +162,40 @@
         }
 
         .platform-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin-right: 10px;
+            font-size: 12px;
         }
 
         .LeetCode-icon {
-            background: #f0d4aa;
-            color: white;
+            background: #f7b900;
+            color: #333;
         }
 
         .CodeChef-icon {
             background: #5b4638;
-            color: white;
+            color: #fff;
         }
 
         .Codeforces-icon {
             background: #1f8acb;
-            color: white;
+            color: #fff;
         }
 
         .GeeksforGeeks-icon {
             background: #2f8d46;
-            color: white;
+            color: #fff;
         }
 
         .loading-spinner {
             border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid #3b82f6;
+            border-top: 3px solid #8257e5;
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -126,204 +212,366 @@
             }
         }
 
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+        /* Responsive tweaks */
+        @media (max-width: 640px) {
+            .stats-card {
+                padding: 1rem;
+            }
 
-        ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 4px;
-        }
+            .solution-card {
+                padding: 1rem;
+            }
 
-        ::-webkit-scrollbar-track {
-            background: #f3f4f6;
+            .platform-icon {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
 
-<body class="bg-gray-50 min-h-screen font-sans antialiased">
-    <!-- Header -->
-    <header class="gradient-bg text-white py-7 px-4 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="flex items-center">
-                <img src="https://github.com/Aman-Singh-07.png" alt="Author"
-                    class="rounded-full w-12 h-12 border-2 border-white shadow-lg mr-4">
-                    <div>
-                        <h2 class="text-lg font-bold tracking-tight">Aman Singh</h2>
-                        <p class="text-blue-200 text-xs">Problem Solver</p>
+<body
+    class="bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 min-h-screen text-white overflow-x-hidden font-sans antialiased">
+    <!-- Background Effects -->
+    <div
+        class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-20 rounded-full blur-3xl float-animation md:w-24 md:h-24">
+    </div>
+    <div
+        class="absolute bottom-40 right-20 w-24 h-24 bg-gradient-to-r from-pink-500 to-purple-500 opacity-20 rounded-full blur-3xl float-animation delay-1000 md:w-32 md:h-32">
+    </div>
+    <div
+        class="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-15 rounded-full blur-2xl spin-animation md:w-20 md:h-20">
+    </div>
+    <div class="triangle top-10 right-40 opacity-30 blur-sm md:right-60"></div>
+    <div class="triangle bottom-20 left-20 opacity-20 blur-sm spin-animation md:left-40"></div>
+    <div
+        class="absolute top-1/2 right-1/3 w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-10 rounded-full bounce-animation md:w-16 md:h-16">
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full bg-gray-800/80 backdrop-blur-md shadow-lg z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h2
+                class="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                Codinta</h2>
+            <button id="hamburger" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+            <div id="nav-menu"
+                class="hidden md:flex md:gap-6 absolute md:static top-16 right-0 w-64 md:w-auto bg-gray-800/90 md:bg-transparent p-6 md:p-0 flex-col md:flex-row gap-4 transition-transform transform md:transform-none lg:mr-24">
+                <a href="#home" class="hover:text-purple-400 transition-colors text-sm md:text-base">Home</a>
+                <a href="#topics" class="hover:text-purple-400 transition-colors text-sm md:text-base">Topics</a>
+                <a href="#solutions" class="hover:text-purple-400 transition-colors text-sm md:text-base">Solutions</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container max-w-6xl mx-auto pt-24 pb-12 px-2 md:px-6 relative">
+        <!-- Hero Section -->
+        <section id="home" class="text-center mb-12 md:mb-16 scroll-reveal">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-4">
+                <div class="flex flex-col items-center mb-4 md:mb-0">
+                    <img src="https://github.com/Aman-Singh-07.png" alt="Author"
+                        class="rounded-full w-20 h-20 border-4 border-purple-400 shadow-lg mb-2">
+                    <h2 class="text-lg font-bold tracking-tight">Aman Singh</h2>
+                    <p class="text-purple-300 text-xs">Problem Solver</p>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h1
+                        class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mb-6 animate-fade-in">
+                        Welcome to Codinta</h1>
+                    <p
+                        class="text-base md:text-xl text-gray-300 mb-8 bg-gray-800/80 p-4 md:p-6 rounded-xl shadow-lg backdrop-blur-sm scroll-reveal">
+                        Track and explore all your Competitive Programming solutions in Java across multiple
+                        platforms.<br>Professional, easy, and GitHub-integrated.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-4">
+                        <a href="https://github.com/Aman-Singh-07/Daily-CP-in-Java" target="_blank"
+                            class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold shadow hover:scale-105 hover:shadow-lg glow-effect transition-all duration-300">
+                            GitHub Repo
+                        </a>
+                        <button onclick="refreshSolutions()"
+                            class="bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold shadow hover:scale-105 hover:shadow-lg glow-effect transition-all duration-300 text-white">Reload
+                            Solutions</button>
                     </div>
-            </div>
-            <div class="flex items-center space-x-6">
-                <span>EspritCode</span>
-                <a href="https://github.com/Aman-Singh-07/Daily-CP-in-Java" target="_blank"
-                    class="bg-white text-primary px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 hover:text-accent transition-colors flex items-center">
-                    <svg height="20" width="20" fill="currentColor" >
-                        <use href="#github-icon"></use>
-                    </svg>
-                </a>
-                <button onclick="refreshSolutions()"
-                    class="bg-accent px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-600 transition-colors flex items-center">
-                    <svg height="18" width="18" fill="white"  viewBox="0 0 24 24">
-                        <path
-                            d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6a6 6 0 01-6 6c-2.21 0-4.15-1.2-5.19-3H4.26c1.28 3.3 4.56 5.67 8.24 5.67 5.07 0 9.18-4.11 9.18-9.18S17.07 4 12 4z" />
-                    </svg>
-                </button>
-            </div>
-            <div class="flex items-center">
-                <img src="https://github.com/identicon.png" alt="Developer"
-                    class="rounded-full w-10 h-10 border-2 border-white shadow-lg mr-3">
-                <div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://github.com/identicon.png" alt="Developer"
+                        class="rounded-full w-14 h-14 border-4 border-indigo-400 shadow-lg mb-2">
                     <h2 class="text-lg font-bold tracking-tight">Bittu Prajapati</h2>
-                    <p class="text-blue-200 text-xs">Website Developer</p>
+                    <p class="text-purple-300 text-xs">Website Developer</p>
                 </div>
             </div>
-        </div>
-        <!-- Github SVG Icon -->
-        <svg style="display:none;">
-            <symbol id="github-icon" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.6-.18-3.29-.8-3.29-3.56 0-.79.28-1.43.74-1.93-.07-.18-.32-.92.07-.1 0 0 .6-.19 1.97.74.57-.16 1.18-.24 1.79-.24.61 0 1.22.08 1.79.24 1.37-.93 1.97-.74 1.97-.74.39-.82.14-.92.07-.1.46.5.74 1.14.74 1.93 0 2.76-1.69 3.38-3.3 3.56.29.25.54.74.54 1.49 0 1.08-.01 1.95-.01 2.22 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-                </path>
-            </symbol>
-        </svg>
-    </header>
-    <!-- Stats Section -->
-    <section class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+        </section>
+
+        <!-- Stats Section -->
+        <section class="flex flex-col md:flex-row justify-center gap-4 md:gap-8 mb-12 md:mb-16 scroll-reveal">
+            <div class="stats-card text-white p-4 md:p-6 rounded-xl card-hover relative overflow-hidden flex-1 min-w-0">
                 <p class="absolute top-2 right-4 text-3xl">📊</p>
-                <p class="text-green-100 text-xs">Total Solutions</p>
-                <p class="text-3xl font-bold mt-1" id="totalSolutions">500+</p>
+                <p class="text-purple-100 text-xs">Total Solutions</p>
+                <p class="text-2xl md:text-3xl font-bold mt-1" id="totalSolutions">500+</p>
             </div>
-            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+            <div class="stats-card text-white p-4 md:p-6 rounded-xl card-hover relative overflow-hidden flex-1 min-w-0">
                 <p class="absolute top-2 right-4 text-3xl">🏆</p>
-                <p class="text-green-100 text-xs">Platforms</p>
-                <p class="text-3xl font-bold mt-1">4</p>
+                <p class="text-purple-100 text-xs">Platforms</p>
+                <p class="text-2xl md:text-3xl font-bold mt-1">4</p>
             </div>
-            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+            <div class="stats-card text-white p-4 md:p-6 rounded-xl card-hover relative overflow-hidden flex-1 min-w-0">
                 <p class="absolute top-2 right-4 text-3xl">☕</p>
-                <p class="text-green-100 text-xs">Language</p>
-                <p class="text-3xl font-bold mt-1">Java</p>
+                <p class="text-purple-100 text-xs">Language</p>
+                <p class="text-2xl md:text-3xl font-bold mt-1">Java</p>
             </div>
-            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+            <div class="stats-card text-white p-4 md:p-6 rounded-xl card-hover relative overflow-hidden flex-1 min-w-0">
                 <p class="absolute top-2 right-4 text-3xl">🔄</p>
-                <p class="text-green-100 text-xs">Last Updated</p>
-                <p class="text-3xl font-bold mt-1">Daily</p>
+                <p class="text-purple-100 text-xs">Last Updated</p>
+                <p class="text-2xl md:text-3xl font-bold mt-1">Daily</p>
             </div>
-        </div>
-    </section>
-    <!-- Topics Covered -->
-    <section class="container mx-auto px-4 mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">🧠 Topics Covered</h2>
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="text-center p-3 bg-blue-50 rounded-lg">
-                    <div class="text-2xl mb-2">🔢</div>
-                    <p class="text-sm font-medium">Arrays & Strings</p>
-                </div>
-                <div class="text-center p-3 bg-green-50 rounded-lg">
-                    <div class="text-2xl mb-2">🔄</div>
-                    <p class="text-sm font-medium">Recursion & Backtracking</p>
-                </div>
-                <div class="text-center p-3 bg-purple-50 rounded-lg">
-                    <div class="text-2xl mb-2">🔍</div>
-                    <p class="text-sm font-medium">Sorting & Searching</p>
-                </div>
-                <div class="text-center p-3 bg-yellow-50 rounded-lg">
-                    <div class="text-2xl mb-2">🧮</div>
-                    <p class="text-sm font-medium">Math & Number Theory</p>
-                </div>
-                <div class="text-center p-3 bg-red-50 rounded-lg">
-                    <div class="text-2xl mb-2">🎯</div>
-                    <p class="text-sm font-medium">Greedy & Sliding Window</p>
-                </div>
-                <div class="text-center p-3 bg-indigo-50 rounded-lg">
-                    <div class="text-2xl mb-2">📚</div>
-                    <p class="text-sm font-medium">Stack, Queue & Trees</p>
-                </div>
-                <div class="text-center p-3 bg-pink-50 rounded-lg">
-                    <div class="text-2xl mb-2">🕸️</div>
-                    <p class="text-sm font-medium">Graphs & DP</p>
-                </div>
-                <div class="text-center p-3 bg-orange-50 rounded-lg">
-                    <div class="text-2xl mb-2">➕</div>
-                    <p class="text-sm font-medium">And many more...</p>
+        </section>
+
+        <!-- Topics Covered -->
+        <section id="topics" class="mb-12 md:mb-16 scroll-reveal">
+            <h2
+                class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent mb-4">
+                🧠 Topics Covered</h2>
+            <div class="bg-gray-800/80 p-4 md:p-6 rounded-xl shadow-lg backdrop-blur-sm">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                    <div class="text-center p-2 md:p-3 bg-blue-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🔢</div>
+                        <p class="text-xs md:text-sm font-medium">Arrays & Strings</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-green-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🔄</div>
+                        <p class="text-xs md:text-sm font-medium">Recursion & Backtracking</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-purple-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🔍</div>
+                        <p class="text-xs md:text-sm font-medium">Sorting & Searching</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-yellow-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🧮</div>
+                        <p class="text-xs md:text-sm font-medium">Math & Number Theory</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-red-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🎯</div>
+                        <p class="text-xs md:text-sm font-medium">Greedy & Sliding Window</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-indigo-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">📚</div>
+                        <p class="text-xs md:text-sm font-medium">Stack, Queue & Trees</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-pink-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">🕸️</div>
+                        <p class="text-xs md:text-sm font-medium">Graphs & DP</p>
+                    </div>
+                    <div class="text-center p-2 md:p-3 bg-orange-900/70 rounded-lg">
+                        <div class="text-xl md:text-2xl mb-1 md:mb-2">➕</div>
+                        <p class="text-xs md:text-sm font-medium">And many more...</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Platform Filter -->
-    <section class="container mx-auto px-4 mb-8">
-        <div class="flex flex-wrap gap-4 justify-center">
-            <button onclick="filterPlatform('all')"
-                class="platform-filter bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-secondary transition-colors active focus:outline-none ring-2 ring-accent">All</button>
-            <button onclick="filterPlatform('LeetCode')"
-                class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-yellow-200 transition-colors focus:outline-none">LeetCode</button>
-            <button onclick="filterPlatform('CodeChef')"
-                class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-orange-100 transition-colors focus:outline-none">CodeChef</button>
-            <button onclick="filterPlatform('Codeforces')"
-                class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors focus:outline-none">Codeforces</button>
-            <button onclick="filterPlatform('GeeksforGeeks')"
-                class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-green-100 transition-colors focus:outline-none">GeeksforGeeks</button>
-        </div>
-    </section>
-    <!-- Solutions Grid -->
-    <section class="container mx-auto px-4 mb-8">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">💡 Solutions</h2>
-            <div class="flex items-center space-x-4">
-                <input type="text" id="searchInput" placeholder="Search solutions..."
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm"
-                    autocomplete="off">
-                <select id="difficultyFilter"
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
-                    <option value="all">All</option>
-                    <option value="basic">Basic</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
+        </section>
+
+        <!-- Platform Filter -->
+        <section class="mb-12 md:mb-16 scroll-reveal">
+            <div class="flex flex-wrap gap-2 md:gap-4 justify-center">
+                <button onclick="filterPlatform('all')"
+                    class="platform-filter bg-indigo-700 text-white px-3 py-1 md:px-6 md:py-2 rounded-lg font-medium hover:bg-purple-800 transition-colors active focus:outline-none ring-2 ring-purple-400">All</button>
+                <button onclick="filterPlatform('LeetCode')"
+                    class="platform-filter bg-gray-800 text-purple-300 px-3 py-1 md:px-6 md:py-2 rounded-lg font-medium hover:bg-yellow-900 transition-colors focus:outline-none">LeetCode</button>
+                <button onclick="filterPlatform('CodeChef')"
+                    class="platform-filter bg-gray-800 text-purple-300 px-3 py-1 md:px-6 md:py-2 rounded-lg font-medium hover:bg-orange-900 transition-colors focus:outline-none">CodeChef</button>
+                <button onclick="filterPlatform('Codeforces')"
+                    class="platform-filter bg-gray-800 text-purple-300 px-3 py-1 md:px-6 md:py-2 rounded-lg font-medium hover:bg-blue-900 transition-colors focus:outline-none">Codeforces</button>
+                <button onclick="filterPlatform('GeeksforGeeks')"
+                    class="platform-filter bg-gray-800 text-purple-300 px-3 py-1 md:px-6 md:py-2 rounded-lg font-medium hover:bg-green-900 transition-colors focus:outline-none">GeeksforGeeks</button>
             </div>
-        </div>
-        <div id="loadingSpinner" class="text-center py-8">
-            <div class="loading-spinner mx-auto"></div>
-            <p class="text-gray-600 mt-4">Loading solutions...</p>
-        </div>
-        <div id="solutionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
-        <div id="noResults" class="text-center py-8 hidden">
-            <div class="text-6xl mb-4">😕</div>
-            <p class="text-gray-600">No solutions found matching your criteria.</p>
-        </div>
-    </section>
+        </section>
+
+        <!-- Solutions Grid -->
+        <section id="solutions" class="mb-12 md:mb-16 scroll-reveal">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-2">
+                <h2
+                    class="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                    💡 Solutions</h2>
+                <div
+                    class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+                    <input type="text" id="searchInput" placeholder="Search solutions..."
+                        class="w-full md:w-auto px-4 py-2 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 bg-gray-800 text-white shadow-sm"
+                        autocomplete="off">
+                    <select id="difficultyFilter"
+                        class="w-full md:w-auto px-4 py-2 border border-purple-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 bg-gray-800 text-white shadow-sm">
+                        <option value="all">All</option>
+                        <option value="basic">Basic</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+            <div id="loadingSpinner" class="text-center py-8">
+                <div class="loading-spinner mx-auto"></div>
+                <p class="text-purple-300 mt-4">Loading solutions...</p>
+            </div>
+            <div id="solutionsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 hidden"></div>
+            <div id="noResults" class="text-center py-8 hidden">
+                <div class="text-6xl mb-4">😕</div>
+                <p class="text-purple-300">No solutions found matching your criteria.</p>
+            </div>
+        </section>
+    </div>
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-8 px-4 mt-12">
+    <footer class="bg-gray-800/80 text-gray-300 py-8 px-4 mt-12 border-t border-gray-800">
         <div class="container mx-auto text-center">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="https://github.com/Aman-Singh-07" target="_blank"
-                    class="text-2xl hover:text-blue-300 transition-colors">🐱</a>
+                    class="text-2xl hover:text-purple-400 transition-colors">🐱</a>
                 <a href="https://linkedin.com/in/aman-singh-07" target="_blank"
-                    class="text-2xl hover:text-blue-300 transition-colors">💼</a>
-                <a href="mailto:your.email@example.com" class="text-2xl hover:text-blue-300 transition-colors">📧</a>
+                    class="text-2xl hover:text-purple-400 transition-colors">💼</a>
+                <a href="mailto:your.email@example.com" class="text-2xl hover:text-purple-400 transition-colors">📧</a>
             </div>
-            <p class="text-blue-200">🧑‍💻 Author: <span class="font-semibold">Aman Singh</span></p>
-            <p class="text-blue-300 mt-2">Java enthusiast & Competitive Programmer</p>
-            <p class="text-sm text-blue-400 mt-4">⭐ Star this repo if it helps you!</p>
+            <p class="text-purple-200">🧑‍💻 Author: <span class="font-semibold">Aman Singh</span></p>
+            <p class="text-purple-300 mt-2">Java enthusiast & Competitive Programmer</p>
+            <p class="text-sm text-purple-400 mt-4">⭐ Star this repo if it helps you!</p>
         </div>
     </footer>
-    <script src="./Solutions.js"></script>
-    <script>
-        let allSolutions = [...sampleSolutions];
-        let filteredSolutions = [...sampleSolutions];
-        let currentPlatform = 'all';
 
-        function initializePage() {
-            setTimeout(() => {
-                document.getElementById('loadingSpinner').classList.add('hidden');
-                document.getElementById('solutionsGrid').classList.remove('hidden');
-                renderSolutions();
-            }, 700);
+    <!-- Fallback solutions in case Solutions.js fails to load -->
+    <script>
+        const defaultSolutions = [
+            {
+                title: "Example Solution",
+                platform: "LeetCode",
+                difficulty: "medium",
+                description: "This is a sample solution. Please check if Solutions.js is properly loaded.",
+                topics: ["Arrays", "Strings"],
+                dateAdded: "2024-01-01",
+                filename: "Example.java"
+            }
+        ];
+
+        // Initialize solutions array with default content
+        window.sampleSolutions = window.sampleSolutions || defaultSolutions;
+    </script>
+
+    <!-- Load Solutions.js with cache busting -->
+    <script>
+        const solutionsScript = document.createElement('script');
+        solutionsScript.src = './Solutions.js?v=' + Date.now();
+        document.head.appendChild(solutionsScript);
+    </script>
+
+    <!-- Main Application Script -->
+    <script>
+        let allSolutions = [];
+        let filteredSolutions = [];
+        let currentPlatform = 'all';
+        let isLoading = true;
+
+        function loadSolutionsJS() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = './Solutions.js?v=' + Date.now();
+                script.onload = resolve;
+                script.onerror = () => {
+                    console.error('Failed to load Solutions.js, using fallback data');
+                    window.sampleSolutions = defaultSolutions;
+                    resolve();
+                };
+                document.head.appendChild(script);
+            });
         }
+
+        function cacheSolutions(solutions) {
+            try {
+                localStorage.setItem('cachedSolutions', JSON.stringify(solutions));
+                localStorage.setItem('cachedSolutionsTimestamp', Date.now());
+            } catch (e) {
+                console.warn('Failed to cache solutions:', e);
+            }
+        }
+
+        function getCachedSolutions() {
+            try {
+                const cached = localStorage.getItem('cachedSolutions');
+                const timestamp = localStorage.getItem('cachedSolutionsTimestamp');
+                
+                // Only use cache if it's less than 24 hours old
+                if (cached && timestamp && (Date.now() - parseInt(timestamp)) < 86400000) {
+                    return JSON.parse(cached);
+                }
+            } catch (e) {
+                console.warn('Failed to read cached solutions:', e);
+            }
+            return null;
+        }
+
+        async function initializePage() {
+            try {
+                isLoading = true;
+                document.getElementById('loadingSpinner').classList.remove('hidden');
+                document.getElementById('solutionsGrid').classList.add('hidden');
+
+                // Try to use cached version first for faster load
+                const cached = getCachedSolutions();
+                if (cached) {
+                    allSolutions = cached;
+                    filteredSolutions = [...cached];
+                }
+
+                // Load fresh data in background
+                await loadSolutionsJS();
+                await new Promise(resolve => setTimeout(resolve, 200));
+
+                // Update with fresh data if available
+                if (window.sampleSolutions) {
+                    allSolutions = window.sampleSolutions;
+                    filteredSolutions = [...window.sampleSolutions];
+                    cacheSolutions(allSolutions);
+                }
+
+                isLoading = false;
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                renderSolutions();
+                document.getElementById('solutionsGrid').classList.remove('hidden');
+
+                const totalElement = document.getElementById('totalSolutions');
+                if (totalElement) {
+                    totalElement.textContent = allSolutions.length;
+                }
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                allSolutions = defaultSolutions;
+                filteredSolutions = [...defaultSolutions];
+                isLoading = false;
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                renderSolutions();
+                document.getElementById('solutionsGrid').classList.remove('hidden');
+            }
+        }
+
+        function retryInitialization(retries = 3, delay = 500) {
+            return new Promise(async (resolve, reject) => {
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        await initializePage();
+                        resolve();
+                        return;
+                    } catch (err) {
+                        if (i === retries - 1) {
+                            reject(err);
+                        } else {
+                            await new Promise(r => setTimeout(r, delay));
+                        }
+                    }
+                }
+            });
+        }
+
         function renderSolutions() {
             const grid = document.getElementById('solutionsGrid');
             const noResults = document.getElementById('noResults');
@@ -339,28 +587,29 @@
                 const difficultyClass = `difficulty-${solution.difficulty}`;
                 const githubUrl = `https://github.com/Aman-Singh-07/Daily-CP-in-Java/blob/main/${solution.platform}/${solution.filename}`;
                 return `
-                    <div class="solution-card p-6 rounded-xl shadow-lg card-hover fade-in border border-gray-200" data-platform="${solution.platform}">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="flex items-center">
-                                <div class="platform-icon ${solution.platform}-icon">${platformIcon}</div>
+                    <div class="solution-card bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-sm text-white p-5 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-purple-500/20 flex flex-col justify-between gap-4" data-platform="${solution.platform}">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="platform-icon ${solution.platform}-icon shrink-0">${platformIcon}</div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-gray-800">${solution.title}</h3>
-                                    <p class="text-xs text-gray-500 capitalize">${solution.platform}</p>
+                                    <h3 class="text-lg font-bold text-white/90 line-clamp-1">${solution.title}</h3>
+                                    <p class="text-xs text-purple-300/90 capitalize">${solution.platform}</p>
                                 </div>
                             </div>
-                            <span class="${difficultyClass} text-white px-3 py-1 rounded-full text-xs font-semibold uppercase shadow-sm">
+                            <span class="${difficultyClass} text-white/90 px-3 py-1 rounded-full text-xs font-medium uppercase shadow-sm">
                                 ${solution.difficulty}
                             </span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">${solution.description}</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
+                        <p class="text-sm text-gray-300/90 line-clamp-2">${solution.description}</p>
+                        <div class="flex flex-wrap gap-2">
                             ${solution.topics.map(topic =>
-                    `<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">${topic}</span>`
-                ).join('')}
+                                `<span class="bg-purple-900/50 text-purple-200/90 px-3 py-1 rounded-full text-xs font-medium">${topic}</span>`
+                            ).join('')}
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Added: ${solution.dateAdded}</span>
-                            <a href="${githubUrl}" target="_blank" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-secondary transition-colors shadow-sm">
+                        <div class="flex items-center justify-between pt-2 border-t border-purple-500/10">
+                            <span class="text-xs text-purple-300/75">Added: ${solution.dateAdded}</span>
+                            <a href="${githubUrl}" target="_blank" 
+                                class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-sm">
                                 View Solution
                             </a>
                         </div>
@@ -368,6 +617,7 @@
                 `;
             }).join('');
         }
+
         function getPlatformIcon(platform) {
             const icons = {
                 'LeetCode': 'LC',
@@ -377,17 +627,18 @@
             };
             return icons[platform] || 'CP';
         }
+
         function filterPlatform(platform) {
             currentPlatform = platform;
-            // Update button states
             document.querySelectorAll('.platform-filter').forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white', 'active', 'ring-2', 'ring-accent');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
+                btn.classList.remove('bg-indigo-700', 'text-white', 'active', 'ring-2', 'ring-purple-400');
+                btn.classList.add('bg-gray-800', 'text-purple-300');
             });
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-primary', 'text-white', 'active', 'ring-2', 'ring-accent');
+            event.target.classList.remove('bg-gray-800', 'text-purple-300');
+            event.target.classList.add('bg-indigo-700', 'text-white', 'active', 'ring-2', 'ring-purple-400');
             applyFilters();
         }
+
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const difficultyFilter = document.getElementById('difficultyFilter').value;
@@ -401,18 +652,59 @@
             });
             renderSolutions();
         }
+
         function refreshSolutions() {
-            document.getElementById('solutionsGrid').classList.add('hidden');
-            document.getElementById('loadingSpinner').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('loadingSpinner').classList.add('hidden');
-                document.getElementById('solutionsGrid').classList.remove('hidden');
-                renderSolutions();
-            }, 650);
+            if (isLoading) return;
+            
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.innerHTML = '<div class="inline-block loading-spinner mr-2"></div> Reloading...';
+            btn.disabled = true;
+            
+            initializePage().finally(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            });
         }
+
+        // Event Listeners
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('difficultyFilter').addEventListener('change', applyFilters);
-        initializePage();
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("hidden");
+            navMenu.classList.toggle("inRow");
+        });
+
+        // Scroll Reveal Animation
+        const scrollElements = document.querySelectorAll(".scroll-reveal");
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+        scrollElements.forEach((el) => observer.observe(el));
+
+        // Initialize the page with retry mechanism
+        document.addEventListener('DOMContentLoaded', () => {
+            retryInitialization().catch(err => {
+                console.error('Failed after retries:', err);
+                // Fallback to default solutions
+                allSolutions = defaultSolutions;
+                filteredSolutions = [...defaultSolutions];
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                renderSolutions();
+                document.getElementById('solutionsGrid').classList.remove('hidden');
+            });
+        });
     </script>
 </body>
 
