@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Tracker | Aman Singh</title>
+    <meta name="description" content="Track and explore all your Competitive Programming solutions in Java across multiple platforms. Professional, easy, and GitHub-integrated.">
+    <link rel="icon" href="https://github.com/Aman-Singh-07.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#24292f',
+                        secondary: '#1e1b4b',
+                        accent: '#3b82f6',
+                        github: '#24292f'
+                    },
+                    fontFamily: {
+                        'mono': ['Fira Mono', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(120deg, #24292f 0%, #1e1b4b 60%, #3b82f6 100%);
+        }
+        .card-hover {
+            transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 12px 32px rgba(44,62,80,.12);
+        }
+        .stats-card {
+            background: linear-gradient(120deg, #059669 0%, #10b981 100%);
+        }
+        .difficulty-basic { background: linear-gradient(120deg, #7510b9 0%, #c334d3 100%); }
+        .difficulty-easy { background: linear-gradient(120deg, #10b981 0%, #34d399 100%); }
+        .difficulty-medium { background: linear-gradient(120deg, #f59e0b 0%, #fbbf24 100%); }
+        .difficulty-hard { background: linear-gradient(120deg, #ef4444 0%, #f87171 100%); }
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(14px);} to {opacity:1;transform:none;} }
+        .platform-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;}
+        .LeetCode-icon { background: #f0d4aa; color: white; }
+        .CodeChef-icon { background: #5b4638; color: white; }
+        .Codeforces-icon { background: #1f8acb; color: white; }
+        .GeeksforGeeks-icon { background: #2f8d46; color: white; }
+        .loading-spinner {
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg);} 100%{transform:rotate(360deg);} }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #f3f4f6; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans antialiased">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-7 px-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="https://github.com/Aman-Singh-07.png" alt="Author" class="rounded-full w-12 h-12 border-2 border-white shadow-lg mr-4">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight">CP Tracker</h1>
+                    <p class="text-blue-200 text-sm mt-1">Effortless Competitive Programming solutions in Java</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="https://github.com/Aman-Singh-07/Daily-CP-in-Java" target="_blank" class="bg-white text-primary px-4 py-2 rounded-lg font-semibold shadow hover:bg-gray-100 hover:text-accent transition-colors flex items-center">
+                    <svg height="20" width="20" fill="currentColor" class="mr-2"><use href="#github-icon"></use></svg>
+                    GitHub
+                </a>
+                <button onclick="refreshSolutions()" class="bg-accent px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-600 transition-colors flex items-center">
+                    <svg height="18" width="18" fill="white" class="mr-2" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6a6 6 0 01-6 6c-2.21 0-4.15-1.2-5.19-3H4.26c1.28 3.3 4.56 5.67 8.24 5.67 5.07 0 9.18-4.11 9.18-9.18S17.07 4 12 4z"/></svg>
+                    Refresh
+                </button>
+            </div>
+        </div>
+        <!-- Github SVG Icon -->
+        <svg style="display:none;">
+            <symbol id="github-icon" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.6-.18-3.29-.8-3.29-3.56 0-.79.28-1.43.74-1.93-.07-.18-.32-.92.07-.1 0 0 .6-.19 1.97.74.57-.16 1.18-.24 1.79-.24.61 0 1.22.08 1.79.24 1.37-.93 1.97-.74 1.97-.74.39-.82.14-.92.07-.1.46.5.74 1.14.74 1.93 0 2.76-1.69 3.38-3.3 3.56.29.25.54.74.54 1.49 0 1.08-.01 1.95-.01 2.22 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </symbol>
+        </svg>
+    </header>
+    <!-- Stats Section -->
+    <section class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+                <p class="absolute top-2 right-4 text-3xl">📊</p>
+                <p class="text-green-100 text-xs">Total Solutions</p>
+                <p class="text-3xl font-bold mt-1" id="totalSolutions">500+</p>
+            </div>
+            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+                <p class="absolute top-2 right-4 text-3xl">🏆</p>
+                <p class="text-green-100 text-xs">Platforms</p>
+                <p class="text-3xl font-bold mt-1">4</p>
+            </div>
+            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+                <p class="absolute top-2 right-4 text-3xl">☕</p>
+                <p class="text-green-100 text-xs">Language</p>
+                <p class="text-3xl font-bold mt-1">Java</p>
+            </div>
+            <div class="stats-card text-white p-6 rounded-xl card-hover relative overflow-hidden">
+                <p class="absolute top-2 right-4 text-3xl">🔄</p>
+                <p class="text-green-100 text-xs">Last Updated</p>
+                <p class="text-3xl font-bold mt-1">Daily</p>
+            </div>
+        </div>
+    </section>
+    <!-- Topics Covered -->
+    <section class="container mx-auto px-4 mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">🧠 Topics Covered</h2>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                    <div class="text-2xl mb-2">🔢</div>
+                    <p class="text-sm font-medium">Arrays & Strings</p>
+                </div>
+                <div class="text-center p-3 bg-green-50 rounded-lg">
+                    <div class="text-2xl mb-2">🔄</div>
+                    <p class="text-sm font-medium">Recursion & Backtracking</p>
+                </div>
+                <div class="text-center p-3 bg-purple-50 rounded-lg">
+                    <div class="text-2xl mb-2">🔍</div>
+                    <p class="text-sm font-medium">Sorting & Searching</p>
+                </div>
+                <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                    <div class="text-2xl mb-2">🧮</div>
+                    <p class="text-sm font-medium">Math & Number Theory</p>
+                </div>
+                <div class="text-center p-3 bg-red-50 rounded-lg">
+                    <div class="text-2xl mb-2">🎯</div>
+                    <p class="text-sm font-medium">Greedy & Sliding Window</p>
+                </div>
+                <div class="text-center p-3 bg-indigo-50 rounded-lg">
+                    <div class="text-2xl mb-2">📚</div>
+                    <p class="text-sm font-medium">Stack, Queue & Trees</p>
+                </div>
+                <div class="text-center p-3 bg-pink-50 rounded-lg">
+                    <div class="text-2xl mb-2">🕸️</div>
+                    <p class="text-sm font-medium">Graphs & DP</p>
+                </div>
+                <div class="text-center p-3 bg-orange-50 rounded-lg">
+                    <div class="text-2xl mb-2">➕</div>
+                    <p class="text-sm font-medium">And many more...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Platform Filter -->
+    <section class="container mx-auto px-4 mb-8">
+        <div class="flex flex-wrap gap-4 justify-center">
+            <button onclick="filterPlatform('all')" class="platform-filter bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-secondary transition-colors active focus:outline-none ring-2 ring-accent">All</button>
+            <button onclick="filterPlatform('LeetCode')" class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-yellow-200 transition-colors focus:outline-none">LeetCode</button>
+            <button onclick="filterPlatform('CodeChef')" class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-orange-100 transition-colors focus:outline-none">CodeChef</button>
+            <button onclick="filterPlatform('Codeforces')" class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors focus:outline-none">Codeforces</button>
+            <button onclick="filterPlatform('GeeksforGeeks')" class="platform-filter bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-green-100 transition-colors focus:outline-none">GeeksforGeeks</button>
+        </div>
+    </section>
+    <!-- Solutions Grid -->
+    <section class="container mx-auto px-4 mb-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">💡 Solutions</h2>
+            <div class="flex items-center space-x-4">
+                <input type="text" id="searchInput" placeholder="Search solutions..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm" autocomplete="off">
+                <select id="difficultyFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+                    <option value="all">All</option>
+                    <option value="basic">Basic</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+        <div id="loadingSpinner" class="text-center py-8">
+            <div class="loading-spinner mx-auto"></div>
+            <p class="text-gray-600 mt-4">Loading solutions...</p>
+        </div>
+        <div id="solutionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+        <div id="noResults" class="text-center py-8 hidden">
+            <div class="text-6xl mb-4">😕</div>
+            <p class="text-gray-600">No solutions found matching your criteria.</p>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://github.com/Aman-Singh-07" target="_blank" class="text-2xl hover:text-blue-300 transition-colors">🐱</a>
+                <a href="https://linkedin.com/in/aman-singh-07" target="_blank" class="text-2xl hover:text-blue-300 transition-colors">💼</a>
+                <a href="mailto:your.email@example.com" class="text-2xl hover:text-blue-300 transition-colors">📧</a>
+            </div>
+            <p class="text-blue-200">🧑‍💻 Author: <span class="font-semibold">Aman Singh</span></p>
+            <p class="text-blue-300 mt-2">Java enthusiast & Competitive Programmer</p>
+            <p class="text-sm text-blue-400 mt-4">⭐ Star this repo if it helps you!</p>
+        </div>
+    </footer>
+    <script src="./Solutions.js"></script>
+    <script>
+        let allSolutions = [...sampleSolutions];
+        let filteredSolutions = [...sampleSolutions];
+        let currentPlatform = 'all';
+
+        function initializePage() {
+            setTimeout(() => {
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                document.getElementById('solutionsGrid').classList.remove('hidden');
+                renderSolutions();
+            }, 700);
+        }
+        function renderSolutions() {
+            const grid = document.getElementById('solutionsGrid');
+            const noResults = document.getElementById('noResults');
+            if (filteredSolutions.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+            grid.innerHTML = filteredSolutions.map(solution => {
+                const platformIcon = getPlatformIcon(solution.platform);
+                const difficultyClass = `difficulty-${solution.difficulty}`;
+                const githubUrl = `https://github.com/Aman-Singh-07/Daily-CP-in-Java/blob/main/${solution.platform}/${solution.filename}`;
+                return `
+                    <div class="solution-card p-6 rounded-xl shadow-lg card-hover fade-in border border-gray-200" data-platform="${solution.platform}">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="platform-icon ${solution.platform}-icon">${platformIcon}</div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">${solution.title}</h3>
+                                    <p class="text-xs text-gray-500 capitalize">${solution.platform}</p>
+                                </div>
+                            </div>
+                            <span class="${difficultyClass} text-white px-3 py-1 rounded-full text-xs font-semibold uppercase shadow-sm">
+                                ${solution.difficulty}
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">${solution.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${solution.topics.map(topic => 
+                                `<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">${topic}</span>`
+                            ).join('')}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">Added: ${solution.dateAdded}</span>
+                            <a href="${githubUrl}" target="_blank" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-secondary transition-colors shadow-sm">
+                                View Solution
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        function getPlatformIcon(platform) {
+            const icons = {
+                'LeetCode': 'LC',
+                'CodeChef': 'CC',
+                'Codeforces': 'CF',
+                'GeeksforGeeks': 'GFG'
+            };
+            return icons[platform] || 'CP';
+        }
+        function filterPlatform(platform) {
+            currentPlatform = platform;
+            // Update button states
+            document.querySelectorAll('.platform-filter').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'active', 'ring-2', 'ring-accent');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-primary', 'text-white', 'active', 'ring-2', 'ring-accent');
+            applyFilters();
+        }
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const difficultyFilter = document.getElementById('difficultyFilter').value;
+            filteredSolutions = allSolutions.filter(solution => {
+                const matchesPlatform = currentPlatform === 'all' || solution.platform === currentPlatform;
+                const matchesSearch = solution.title.toLowerCase().includes(searchTerm) || 
+                    solution.description.toLowerCase().includes(searchTerm) ||
+                    solution.topics.some(topic => topic.toLowerCase().includes(searchTerm));
+                const matchesDifficulty = difficultyFilter === 'all' || solution.difficulty === difficultyFilter;
+                return matchesPlatform && matchesSearch && matchesDifficulty;
+            });
+            renderSolutions();
+        }
+        function refreshSolutions() {
+            document.getElementById('solutionsGrid').classList.add('hidden');
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                document.getElementById('solutionsGrid').classList.remove('hidden');
+                renderSolutions();
+            }, 650);
+        }
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('difficultyFilter').addEventListener('change', applyFilters);
+        initializePage();
+    </script>
+</body>
+</html>
