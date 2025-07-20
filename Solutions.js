@@ -3738,4 +3738,40 @@
       "topics": ["String", "Counting"],
       "dateAdded": "2025-07-18"
     },
+        {
+      "platform": "LeetCode",
+      "title": "Water and Jug Problem",
+      "difficulty": "medium",
+      "filename": "WaterAndJugProblem_Medium.java",
+      "description": "Determine whether you can measure exactly z liters using two jugs with capacities x and y liters.",
+      "topics": ["Math", "Number Theory"],
+      "dateAdded": "2025-07-19"
+    },
+    {
+      "platform": "CodeChef",
+      "title": "Weapon Choice",
+      "difficulty": "medium",
+      "filename": "WeaponChoice_Medium.java",
+      "description": "Solve the weapon choice problem from gun and laser.",
+      "topics": ["Greedy"],
+      "dateAdded": "2025-07-19"
+    },
+    {
+      "platform": "Codeforces",
+      "title": "New Year Candles",
+      "difficulty": "easy",
+      "filename": "NewYearCandles_Easy.java",
+      "description": "Calculate how long candles will last when new ones can be made from leftovers.",
+      "topics": ["Math"],
+      "dateAdded": "2025-07-19"
+    },
+    {
+      "platform": "GeeksforGeeks",
+      "title": "Unique Number II",
+      "difficulty": "medium",
+      "filename": "UniqueNumberII_Medium.java",
+      "description": "Find the unique number in an array where all other numbers appear twice.",
+      "topics": ["Bit Manipulation"],
+      "dateAdded": "2025-07-19"
+    },
 ]
