@@ -56,6 +56,11 @@ Daily-CP-in-Java/
 ## 🌟 Star this repo
 If this repository helps you, consider giving it a ⭐ to support and encourage consistent contributions.
 
+## License
+This repository is protected under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.  
+© 2025 Aman Singh. All rights reserved.  
+Unauthorized use, reproduction, or distribution is strictly prohibited.
+
 🧑‍💻 Author
 Aman Singh
 > Java enthusiast & Competitive Programmer
