@@ -23,7 +23,8 @@ public class Main {
                     break;
                 }
                 
-            } if(!isTrue) System.out.println(n-maxn+1);
+            }
+            if(!isTrue) System.out.println(n-maxn+1);
         }
     }
 }
