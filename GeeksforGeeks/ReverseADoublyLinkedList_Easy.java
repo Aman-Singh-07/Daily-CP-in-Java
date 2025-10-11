@@ -13,6 +13,31 @@ class Node {
     }
 }
 */
+
+class Solution {
+    public Node reverse(Node head) {
+        if (head == null || head.next == null) return head;
+
+        Node curr = head;
+        Node temp = null;
+
+        // Swap next and prev for all nodes
+        while (curr != null) {
+            temp = curr.prev;
+            curr.prev = curr.next;
+            curr.next = temp;
+            curr = curr.prev; // move to "next" (which is old prev)
+        }
+
+        // After loop, temp will be at the node before new head
+        if (temp != null) {
+            head = temp.prev;
+        }
+
+        return head;
+    }
+}
+/*
 class Solution {
     public Node reverse(Node head) {
         // code here
@@ -31,4 +56,4 @@ class Solution {
         }
         return head;
     }
-}
+} */
