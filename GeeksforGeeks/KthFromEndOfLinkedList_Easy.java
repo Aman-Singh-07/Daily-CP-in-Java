@@ -1,5 +1,3 @@
-// https://www.geeksforgeeks.org/problems/nth-node-from-end-of-linked-list/1?page=1&category=Linked%20List&status=unsolved&sortBy=submissions
-
 /* Structure of node
 class Node
 {
@@ -14,19 +12,16 @@ class Solution {
     // the end of a linked list.
     int getKthFromLast(Node head, int k) {
         // Your code here
-        Node ptr=head;
-        int len=0;
-        while(ptr!=null){
-            len++;
-            ptr=ptr.next;
+        Node first=head;
+        Node second=head;
+        for(int i=0;i<k;i++){
+            if(first==null) return -1;
+            first=first.next;
         }
-        if(k>len) return -1;
-        ptr=head;
-        int x=len-k;
-        while(x-->0){
-            ptr=ptr.next;
+        while(first!=null){
+            second=second.next;
+            first=first.next;
         }
-        return ptr.data;
-        
+        return second.data;
     }
 }
