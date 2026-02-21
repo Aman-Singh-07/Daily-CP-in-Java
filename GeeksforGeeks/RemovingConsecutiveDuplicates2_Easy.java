@@ -6,11 +6,7 @@ class Solution {
         Stack<Character> stack=new Stack<>();
         for(char ch:s.toCharArray()){
             if(stack.isEmpty() || stack.peek()!=ch) stack.push(ch);
-            else{
-                if(stack.peek()==ch){
-                    stack.pop();
-                }
-            }
+            else stack.pop();
         }
         char[] ch=new char[stack.size()];
         int i=ch.length-1;
