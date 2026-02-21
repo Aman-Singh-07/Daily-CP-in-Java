@@ -4,17 +4,17 @@ class Solution {
     public ArrayList<Integer> nextLargerElement(int[] arr) {
         // code here
         ArrayList<Integer> list=new ArrayList<>();
-        for(int i=0;i<arr.length;i++){
-            boolean isTrue=false;
-            for(int j=i+1;j<arr.length;j++){
-                if(arr[i]<arr[j]){
-                    list.add(arr[j]);
-                    isTrue=true;
-                    break;
-                }
+        Stack<Integer> s=new Stack<>();
+        Stack<Integer> temp=new Stack<>();
+        for(int i=arr.length-1;i>=0;i--){
+            while(!s.isEmpty() && s.peek()<=arr[i]){
+                s.pop();
             }
-            if(!isTrue) list.add(-1);
+            if(s.isEmpty()) temp.push(-1);
+            else temp.push(s.peek());
+            s.push(arr[i]);
         }
+        while(!temp.isEmpty()) list.add(temp.pop());
         return list;
     }
 }
