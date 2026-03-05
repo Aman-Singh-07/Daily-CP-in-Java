@@ -1,4 +1,4 @@
-// https://www.geeksforgeeks.org/batch/dsa-at-your-own-pace/track/DSASP-Tree/problem/count-number-of-subtrees-having-given-sum
+// https://www.geeksforgeeks.org/problems/count-number-of-subtrees-having-given-sum/1
 
 /*class Node
 {
