@@ -3,14 +3,13 @@
 class Solution {
     public int bitwiseComplement(int n) {
         if(n==0) return 1;
-        String s=Integer.toBinaryString(n);
-        StringBuilder sb=new StringBuilder();
-        for(char ch:s.toCharArray()){
-            if(ch=='1') sb.append('0');
-            else sb.append('1');
+        if(n==1) return 0;
+        int temp=n;
+        int res=0;
+        while(temp>0){
+            temp=temp>>1;
+            res=(res<<1)|1;
         }
-        String res=sb.toString();
-        return Integer.parseInt(res,2);
-        
+        return n^res;
     }
 }
