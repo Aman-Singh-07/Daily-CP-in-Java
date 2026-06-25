@@ -2,7 +2,6 @@
 
 import java.io.*;
 import java.util.*;
-
 public class Main {
 
     static FastScanner fs = new FastScanner();
