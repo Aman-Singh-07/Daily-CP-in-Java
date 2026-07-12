@@ -9,7 +9,7 @@ A well-organized collection of Java solutions for daily competitive programming 
 - ✅ [LeetCode](https://leetcode.com/)
 - ✅ [GeeksforGeeks](https://www.geeksforgeeks.org/)
 
-This repository includes 2000+ committed problems covering a wide range of **DSA topics**, from **beginner to advanced**, with an emphasis on code clarity, edge case handling, and optimization.
+This repository includes 2400+ committed problems covering a wide range of **DSA topics**, from **beginner to advanced**, with an emphasis on code clarity, edge case handling, and optimization.
 
 ---
 
@@ -48,7 +48,7 @@ Daily-CP-in-Java/
 └── README.md
 ```
 📈 Stats
-- 🧾 Total commits: 500+
+- 🧾 Total commits: 2400+
 - 🛠 Language: Java
 - 🧪 Platforms: 4
 - 🕓 Last updated: Daily
