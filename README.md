@@ -32,8 +32,6 @@ As a recruiter or engineering manager, here is what this repository demonstrates
 - **Algorithmic Depth**: Solutions range from simple array manipulation to advanced dynamic programming, graph theory, and bit manipulation.
 - **Clean Code Practices**: Emphasizes readable code, proper naming conventions, and handling of edge cases.
 
-> **Note:** Every single line of code in this repository was written by me. I do not use AI assistants for competitive programming, ensuring these solutions reflect my genuine problem-solving capabilities.
-
 ---
 
 ## 📂 Repository Structure
