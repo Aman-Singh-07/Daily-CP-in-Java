@@ -113,9 +113,15 @@ This repository contains implementations and problem-solving patterns across all
 ## 🌟 Support
 If you found this repository helpful, or if you're a recruiter who appreciates the dedication, consider giving it a ⭐!
 
-## 📜 License
-This repository is protected under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
-<br>© 2025 Aman Singh. All rights reserved. Unauthorized use, reproduction, or distribution is strictly prohibited.
+## 📜 License and Attribution
+
+The original Java competitive-programming source code authored by Aman Singh in this repository is licensed under the **[Apache License 2.0](LICENSE)**.
+
+- **Full License Terms**: Refer to the [`LICENSE`](LICENSE) file for the complete Apache License 2.0 legal text.
+- **Attribution & Notice**: Refer to the [`NOTICE`](NOTICE) file for project attribution and copyright details.
+- **Canonical Repository**: The canonical source repository is [https://github.com/Aman-Singh-07/Daily-CP-in-Java](https://github.com/Aman-Singh-07/Daily-CP-in-Java).
+- **Redistribution Terms**: Redistributors must preserve the license and applicable attribution notices in accordance with the terms of the Apache License 2.0.
+- **Third-Party Platforms**: The problem URLs included at the top of solution files identify the respective competitive-programming platforms (LeetCode, GeeksforGeeks, Codeforces, CodeChef). This project does not claim ownership of third-party problem statements, platform trademarks, or platform branding.
 
 <div align="center">
   <b>🧑‍💻 Aman Singh</b> <br>
