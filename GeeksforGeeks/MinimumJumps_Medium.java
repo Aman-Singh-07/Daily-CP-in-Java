@@ -3,9 +3,8 @@
 class Solution {
     public int minJumps(int[] arr) {
         int n=arr.length;
-        if(n<1) return 0;
+        if(n<=1) return 0;
         if(arr[0]==0) return -1;
-        else if(arr[0]!=0 && n==1) return 1;
         int jumps=1;             
         int max=arr[0];      
         int steps=arr[0];         
